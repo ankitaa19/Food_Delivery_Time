@@ -1,0 +1,58 @@
+schema: '2.0'
+stages:
+  clean:
+    cmd: python src/data/cleaning.py
+    deps:
+    - path: data/raw/Food_Delivery_Times.csv
+      hash: md5
+      md5: 20f163e082754da11f7eab4acdd7ddde
+      size: 44200
+    - path: src/data/cleaning.py
+      hash: md5
+      md5: 93754669b787b08cbcf473f1cf2c8b41
+      size: 2598
+    outs:
+    - path: data/processed/food_delivery_clean.csv
+      hash: md5
+      md5: 142a51ff86a8005abef77518c894afc7
+      size: 44830
+  features:
+    cmd: python src/features/feature_engineering.py
+    deps:
+    - path: data/processed/food_delivery_clean.csv
+      hash: md5
+      md5: 142a51ff86a8005abef77518c894afc7
+      size: 44830
+    - path: src/features/feature_engineering.py
+      hash: md5
+      md5: 4af6ea81fe5aadc9faf5e39564063c83
+      size: 3477
+    outs:
+    - path: data/processed/food_delivery_features.csv
+      hash: md5
+      md5: ff33fffa1cd794fd41ec5fb0adee11d5
+      size: 128965
+  train:
+    cmd: python src/models/train.py
+    deps:
+    - path: data/processed/food_delivery_features.csv
+      hash: md5
+      md5: ff33fffa1cd794fd41ec5fb0adee11d5
+      size: 128965
+    - path: src/models/train.py
+      hash: md5
+      md5: f68a482d43b83589117fcec94ada727b
+      size: 6945
+    outs:
+    - path: data/processed/X_test.csv
+      hash: md5
+      md5: 33a442442e40b7ba9d2529bf40e6077f
+      size: 13827
+    - path: data/processed/y_test.csv
+      hash: md5
+      md5: a64f0acf631218e147581351b14f48dc
+      size: 622
+    - path: models/food_delivery_eta_model.pkl
+      hash: md5
+      md5: 3c13f057a9b4bcc031f15f0c4113e746
+      size: 143764

@@ -1,0 +1,26 @@
+stages:
+  clean:
+    cmd: python src/data/cleaning.py
+    deps:
+      - src/data/cleaning.py
+      - data/raw/Food_Delivery_Times.csv
+    outs:
+      - data/processed/food_delivery_clean.csv
+
+  features:
+    cmd: python src/features/feature_engineering.py
+    deps:
+      - src/features/feature_engineering.py
+      - data/processed/food_delivery_clean.csv
+    outs:
+      - data/processed/food_delivery_features.csv
+
+  train:
+    cmd: python src/models/train.py
+    deps:
+      - src/models/train.py
+      - data/processed/food_delivery_features.csv
+    outs:
+      - models/food_delivery_eta_model.pkl
+      - data/processed/X_test.csv
+      - data/processed/y_test.csv

@@ -20,7 +20,7 @@ docker compose up -d
 
 2. **Access the application:**
 
-- **Streamlit Frontend:** http://localhost:8501
+- **Frontend:** http://localhost:8501
 - **FastAPI Backend:** http://localhost:8000
 - **FastAPI Swagger UI:** http://localhost:8000/docs
 - **Health Check:** http://localhost:8000/health
@@ -42,9 +42,6 @@ For local development without Docker:
 cd api
 pip install -r requirements.txt
 
-# Frontend
-cd ..
-pip install -r frontend_requirements.txt
 ```
 
 2. **Start the backend:**
@@ -57,7 +54,8 @@ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 3. **Start the frontend:**
 
 ```bash
-streamlit run app.py --server.port 8501
+cd frontend
+python -m http.server 8501
 ```
 
 ## Docker Architecture
@@ -67,9 +65,7 @@ The Docker setup uses a service-separated architecture:
 ```
 Browser
    ↓
-Streamlit Container (:8501)
-   ↓
-FastAPI Container (:8000)
+Frontend (:8501)  →  FastAPI (:8000)
    ↓
 MLflow Production Model
 ```
@@ -77,7 +73,7 @@ MLflow Production Model
 ### Services
 
 - **api:** FastAPI backend service that loads the MLflow-registered production model
-- **frontend:** Streamlit frontend service that communicates with the API
+- **frontend:** Web UI that calls the prediction API from the browser
 
 ### MLflow Model Access
 
@@ -122,9 +118,10 @@ Food_Delivery_Times/
 ├── data/                 # Raw data
 ├── mlflow.db            # MLflow tracking database
 ├── mlruns/              # MLflow experiment artifacts
-├── app.py               # Streamlit frontend
+├── frontend/            # Delivery ETA web UI
+├── app.py               # Previous Streamlit form
 ├── Dockerfile.api        # FastAPI container definition
-├── Dockerfile.frontend  # Streamlit container definition
+├── Dockerfile.frontend  # Frontend container definition
 ├── docker-compose.yml   # Docker Compose configuration
 └── .dockerignore        # Docker build exclusions
 ```

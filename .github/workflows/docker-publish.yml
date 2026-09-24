@@ -35,8 +35,6 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/food-delivery-eta:api
             ${{ secrets.DOCKERHUB_USERNAME }}/food-delivery-eta:api-${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
       
       - name: Build and push Frontend image
         uses: docker/build-push-action@v5
@@ -47,5 +45,3 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/food-delivery-eta:frontend
             ${{ secrets.DOCKERHUB_USERNAME }}/food-delivery-eta:frontend-${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode-max

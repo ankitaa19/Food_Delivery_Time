@@ -1,0 +1,48 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: food_delivery_api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount MLflow database and artifacts so the container can access the registered model
+      - ./mlflow.db:/app/mlflow.db
+      - ./mlruns:/app/mlruns
+    environment:
+      - MLFLOW_TRACKING_URI=sqlite:///mlflow.db
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - food_delivery_network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: food_delivery_frontend
+    ports:
+      - "8501:8501"
+    environment:
+      # Use the Docker Compose service name instead of localhost
+      - FASTAPI_URL=http://api:8000
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8501', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    networks:
+      - food_delivery_network
+
+networks:
+  food_delivery_network:
+    driver: bridge

@@ -81,14 +81,29 @@ def load_model():
         mlflow_db_path = project_root / "mlflow.db"
         mlflow.set_tracking_uri(f'sqlite:///{mlflow_db_path}')
         
-        # Load model using production alias
+        # Try loading using production alias first
         model_uri = f"models:/{MODEL_NAME}@{MODEL_ALIAS}"
         logger.info(f"Loading model from: {model_uri}")
         
-        model = mlflow.sklearn.load_model(model_uri)
-        logger.info("Model loaded successfully")
+        try:
+            model = mlflow.sklearn.load_model(model_uri)
+            logger.info("Model loaded successfully via alias")
+            return True
+        except Exception as alias_error:
+            logger.warning(f"Failed to load model via alias: {alias_error}")
+            # Fallback to direct model path
+            logger.info("Attempting to load model from direct path...")
+            # Get the model version by alias to find the source
+            from mlflow.tracking import MlflowClient
+            client = MlflowClient()
+            model_version = client.get_model_version_by_alias(MODEL_NAME, MODEL_ALIAS)
+            # Use the source directly
+            direct_uri = model_version.source
+            logger.info(f"Loading model from direct path: {direct_uri}")
+            model = mlflow.sklearn.load_model(direct_uri)
+            logger.info("Model loaded successfully via direct path")
+            return True
         
-        return True
     except Exception as e:
         logger.error(f"Failed to load model: {e}")
         return False

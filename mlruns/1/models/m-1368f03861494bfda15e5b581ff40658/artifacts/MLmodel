@@ -1,0 +1,23 @@
+artifact_path: /Users/ankitalokhande/Desktop/Food_Delivery_Times/mlruns/1/models/m-1368f03861494bfda15e5b581ff40658/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.14.6
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.9.1
+    skops_trusted_types: null
+mlflow_version: 3.16.1
+model_id: m-1368f03861494bfda15e5b581ff40658
+model_size_bytes: 179798
+model_uuid: m-1368f03861494bfda15e5b581ff40658
+prompts: null
+run_id: 1c339862791d4c3581a505f9324c402b
+utc_time_created: '2026-09-23 18:20:38.934141'

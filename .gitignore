@@ -42,7 +42,7 @@ ENV/
 Thumbs.db
 
 # MLflow
-mlruns/
+# mlruns/ tracked for Docker builds in CI/CD
 
 # Temporary files
 *.tmp

@@ -2,225 +2,436 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FoodDelivery ETA Predictor</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-  <i class="leaf leaf-1"></i>
-  <i class="leaf leaf-2"></i>
-  <i class="leaf leaf-3"></i>
-  <i class="leaf leaf-4"></i>
 
-  <div class="page">
-    <header class="topbar">
-      <a class="brand" href="#home">
-        <span class="brand-mark" aria-hidden="true">
-          <img src="hometop.png" alt="Logo" width="26" height="26"/>
-        </span>
-        <span class="brand-name">Food<span>Delivery</span><small class="brand-sub">ETA Predictor</small></span>
+  <!-- Decorative background -->
+  <div class="bg-leaf leaf-1">🍃</div>
+  <div class="bg-leaf leaf-2">🍃</div>
+  <div class="bg-leaf leaf-3">🍃</div>
+
+  <!-- ================= HEADER ================= -->
+  <header class="header">
+
+    <a href="#home" class="brand">
+      <div class="brand-icon">🍴</div>
+
+      <div class="brand-text">
+        <div class="brand-title">
+          Food<span>Delivery</span>
+        </div>
+        <div class="brand-subtitle">ETA Predictor</div>
+      </div>
+    </a>
+
+    <nav class="nav">
+      <a href="#home" data-view="home" class="active">
+        <span>⌂</span>
+        Home
       </a>
-      <nav class="nav">
-        <a class="active" href="#home" data-view="home">⌂ Home</a>
-        <a href="#how" data-view="how">How It Works</a>
-        <a href="#faqs" data-view="faqs">FAQs</a>
-      </nav>
-      <div></div>
-    </header>
 
-    <div data-page="home">
-    <section class="hero" id="home">
-      <div>
+      <a href="#how" data-view="how">
+        How It Works
+      </a>
+
+      <a href="#faqs" data-view="faqs">
+        FAQs
+      </a>
+    </nav>
+
+  </header>
+
+
+  <!-- ================================================= -->
+  <!-- HOME -->
+  <!-- ================================================= -->
+
+  <main data-page="home">
+    <section class="hero">
+      <div class="hero-copy">
         <p class="eyebrow">GOOD FOOD, BETTER PLANS</p>
-        <h1>Know When <em>Your Food Will Arrive</em></h1>
+        <h1>Know When <span>Your Food Will Arrive</span></h1>
         <p class="lede">Get an accurate estimated delivery time based on distance, restaurant preparation time, traffic, weather and more.</p>
         <div class="perks">
-          <div class="perk"><img src="focus.png" alt="Focus" class="perk-icon"/>Plan your time better</div>
-          <div class="perk"><img src="time.png" alt="Time" class="perk-icon"/>More accurate predictions</div>
-          <div class="perk"><img src="star.png" alt="Star" class="perk-icon"/>Smarter food delivery experience</div>
+          <div class="perk"><img src="focus.png" alt="" /> Plan your time better</div>
+          <div class="perk"><img src="time.png" alt="" /> More accurate predictions</div>
+          <div class="perk"><img src="star.png" alt="" /> Smarter food delivery experience</div>
         </div>
       </div>
-      <div class="scene">
-        <div class="script">Good food<br>arrives on time</div>
-        <div class="arrival" id="arrival">
-          <small>Estimated arrival</small>
+      <div class="hero-visual">
+        <p class="script">Good food<br>arrives on time</p>
+        <div class="arrival">
+          <span>Estimated arrival</span>
           <strong id="arrival-value">35 min</strong>
-          <img src="eta.png" alt="ETA" class="eta-icon"/>
+          <img src="eta.png" alt="" />
         </div>
-        <img src="bikerider.png" alt="Delivery rider" class="rider-image"/>
+        <img class="rider" src="bikerider.png" alt="Delivery rider on a scooter" />
       </div>
     </section>
 
-    <section class="panel" aria-label="Delivery details">
-      <form id="predict-form">
-        <div class="steps">
-          <article class="step">
-            <div class="step-head">
-              <img src="1.png" alt="1" class="num"/>
-              <div>
-                <h3>Your Location</h3>
-                <p>How far is the restaurant from you?</p>
-              </div>
-            </div>
-            <label class="field">
-              <img src="distance.png" alt="Distance" class="field-icon"/>
-              <span class="field-label">Distance</span>
-              <input id="distance" type="number" min="0.1" max="100" step="0.1" value="5.3" required />
-              <span class="unit">km</span>
-            </label>
-            <div class="art">
-              <img src="home.png" alt="Home" class="art-image"/>
-            </div>
-          </article>
-          <article class="step">
-            <div class="step-head">
-              <img src="2.png" alt="2" class="num"/>
-              <div>
-                <h3>Restaurant Preparation</h3>
-                <p>Time taken by the restaurant to prepare your order.</p>
-              </div>
-            </div>
-            <label class="field">
-              <img src="cooking.png" alt="Cooking" class="field-icon"/>
-              <span class="field-label">Preparation time</span>
-              <input id="prep" type="number" min="1" max="120" step="1" value="16" required />
-              <span class="unit">min</span>
-            </label>
-            <div class="art">
-              <img src="cooking.png" alt="Cooking" class="art-image"/>
-            </div>
-          </article>
-          <article class="step">
-            <div class="step-head">
-              <img src="3.png" alt="3" class="num"/>
-              <div>
-                <h3>Delivery Partner</h3>
-                <p>Experience of the delivery partner.</p>
-              </div>
-            </div>
-            <label class="field">
-              <img src="rider.png" alt="Rider" class="field-icon"/>
-              <span class="field-label">Rider experience</span>
-              <input id="experience" type="number" min="0" max="50" step="0.5" value="5" required />
-              <span class="unit">years</span>
-            </label>
-            <div class="art">
-              <img src="chef.png" alt="Chef" class="art-image"/>
-            </div>
-          </article>
-          <article class="step">
-            <div class="step-head">
-              <img src="4.png" alt="4" class="num"/>
-              <div>
-                <h3>Delivery Conditions</h3>
-                <p>Current weather, traffic and time of day affect delivery time.</p>
-              </div>
-            </div>
-            <label class="select-row"><img src="weather1.png" alt="Weather" class="select-icon"/><span>Weather</span>
-              <select id="weather">
-                <option>Clear</option><option>Rainy</option><option>Snowy</option><option>Foggy</option><option>Windy</option>
-              </select>
-            </label>
-            <label class="select-row"><img src="trafficlevel.png" alt="Traffic" class="select-icon"/><span>Traffic level</span>
-              <select id="traffic"><option>Low</option><option>Medium</option><option>High</option></select>
-            </label>
-            <label class="select-row"><img src="timeofday.png" alt="Time" class="select-icon"/><span>Time of day</span>
-              <select id="time">
-                <option>Morning</option><option>Afternoon</option><option selected>Evening</option><option>Night</option>
-              </select>
-            </label>
-            <label class="select-row"><img src="vehicletype.png" alt="Vehicle" class="select-icon"/><span>Vehicle type</span>
-              <select id="vehicle"><option>Bike</option><option>Scooter</option><option>Car</option></select>
-            </label>
-          </article>
-        </div>
-        <button class="predict" id="predict-btn" type="submit">
-          <span>✈</span> Predict Delivery Time <span class="end">→</span>
-        </button>
-        <p class="message" id="message" hidden></p>
-      </form>
-    </section>
+    <form id="predict-form" class="panel">
+      <div class="steps">
+        <article class="step">
+          <div class="step-head">
+            <img src="1.png" alt="" />
+            <div><h3>Your Location</h3><p>How far is the restaurant from you?</p></div>
+          </div>
+          <label class="field">
+            <img src="distance.png" alt="" />
+            <span>Distance</span>
+            <input id="distance" name="distance" type="number" min="0.1" max="100" step="0.1" value="5.3" required />
+            <em>km</em>
+          </label>
+          <img class="art" src="home.png" alt="" />
+        </article>
+        <img class="arrow" src="arrrow.png" alt="" />
+        <article class="step">
+          <div class="step-head">
+            <img src="2.png" alt="" />
+            <div><h3>Restaurant Preparation</h3><p>Time taken by the restaurant to prepare your order.</p></div>
+          </div>
+          <label class="field">
+            <img src="chef.png" alt="" />
+            <span>Preparation time</span>
+            <input id="prep" name="prep" type="number" min="1" max="120" step="1" value="16" required />
+            <em>min</em>
+          </label>
+          <img class="art" src="cooking.png" alt="" />
+        </article>
+        <img class="arrow" src="arrrow.png" alt="" />
+        <article class="step">
+          <div class="step-head">
+            <img src="3.png" alt="" />
+            <div><h3>Delivery Partner</h3><p>Experience of the delivery partner.</p></div>
+          </div>
+          <label class="field">
+            <img src="deliverypartner.png" alt="" />
+            <span>Rider experience</span>
+            <input id="experience" name="experience" type="number" min="0" max="50" step="0.5" value="5" required />
+            <em>years</em>
+          </label>
+          <img class="art" src="rider.png" alt="" />
+        </article>
+        <img class="arrow" src="arrrow.png" alt="" />
+        <article class="step">
+          <div class="step-head">
+            <img src="4.png" alt="" />
+            <div><h3>Delivery Conditions</h3><p>Current weather, traffic and time of day affect delivery time.</p></div>
+          </div>
+          <label class="select-row"><img src="weather.png" alt="" /><span>Weather</span>
+            <select id="weather" name="weather"><option>Clear</option><option>Rainy</option><option>Snowy</option><option>Foggy</option><option>Windy</option></select>
+          </label>
+          <label class="select-row"><img src="trafficlevel.png" alt="" /><span>Traffic level</span>
+            <select id="traffic" name="traffic"><option>Low</option><option>Medium</option><option>High</option></select>
+          </label>
+          <label class="select-row"><img src="timeofday.png" alt="" /><span>Time of day</span>
+            <select id="time" name="time"><option>Morning</option><option>Afternoon</option><option selected>Evening</option><option>Night</option></select>
+          </label>
+          <label class="select-row"><img src="vehicletype.png" alt="" /><span>Vehicle type</span>
+            <select id="vehicle" name="vehicle"><option>Bike</option><option>Scooter</option><option>Car</option></select>
+          </label>
+        </article>
+      </div>
+      <button id="predict-btn" class="predict" type="submit">Predict Delivery Time</button>
+      <p id="message" class="message" hidden></p>
+    </form>
 
     <section class="factors">
       <h2>What Affects <span>Delivery Time?</span></h2>
       <p>Your delivery time is estimated using multiple real-world factors.</p>
       <div class="factor-row">
-        <div class="deco left" aria-hidden="true">
-          <img src="burger.png" alt="Burger" class="deco-image"/>
-        </div>
-        <article class="factor"><img src="distance.png" alt="Distance" class="factor-icon"/><h4>Distance</h4><p>Longer distance usually takes more time.</p></article>
-        <article class="factor"><img src="hat.png" alt="Hat" class="factor-icon"/><h4>Preparation Time</h4><p>Time taken by the restaurant to prepare your order.</p></article>
-        <article class="factor"><img src="traffic.png" alt="Traffic" class="factor-icon"/><h4>Traffic Conditions</h4><p>Heavy traffic can slow down the delivery.</p></article>
-        <article class="factor"><img src="weather.png" alt="Weather" class="factor-icon"/><h4>Weather</h4><p>Rain or extreme weather may increase delivery time.</p></article>
-        <article class="factor"><img src="deliverypartner.png" alt="Partner" class="factor-icon"/><h4>Delivery Partner</h4><p>Experienced riders often deliver faster.</p></article>
-        <div class="deco" aria-hidden="true">
-          <img src="chinese.png" alt="Chinese" class="deco-image"/>
-        </div>
+        <img class="deco" src="burger.png" alt="" />
+        <article><img src="distance.png" alt="" /><h3>Distance</h3><p>Longer distance usually takes more time.</p></article>
+        <article><img src="hat.png" alt="" /><h3>Preparation Time</h3><p>Time taken by the restaurant to prepare your order.</p></article>
+        <article><img src="traffic.png" alt="" /><h3>Traffic Conditions</h3><p>Heavy traffic can slow down the delivery.</p></article>
+        <article><img src="weather1.png" alt="" /><h3>Weather</h3><p>Rain or extreme weather may increase delivery time.</p></article>
+        <article><img src="rider.png" alt="" /><h3>Delivery Partner</h3><p>Experienced riders often deliver faster.</p></article>
+        <img class="deco" src="chinese.png" alt="" />
       </div>
     </section>
+  </main>
 
-    <footer>
-      <span>🍴 FoodDelivery ETA Predictor</span>
-      <span>Get your estimated delivery time</span>
-      <span>Plan better, enjoy sooner!</span>
-      <span>♥ Good food brings good mood!</span>
-    </footer>
+  <!-- ================================================= -->
+  <!-- HOW IT WORKS -->
+  <!-- ================================================= -->
+
+  <section
+    data-page="how"
+    class="inner-page"
+    hidden
+  >
+
+    <div class="inner-page-header">
+
+      <div class="eyebrow">
+        SIMPLE & TRANSPARENT
+      </div>
+
+      <h1>
+        How It <span>Works</span>
+      </h1>
+
+      <p>
+        Getting your estimated delivery time is simple.
+        Just provide a few details about your order and delivery.
+      </p>
+
     </div>
 
-    <section class="page-view" data-page="how" hidden>
-      <p class="eyebrow">THE PREDICTION FLOW</p>
-      <h1>How It <em>Works</em></h1>
-      <p class="lede">From the details you enter to a delivery-time estimate, in three steps.</p>
-      <div class="flow">
-        <article class="flow-card">
-          <span class="num">1</span>
-          <h3>Enter the trip</h3>
-          <p>Tell us how far the restaurant is, how long the kitchen needs to prepare the order, and how many years of experience the rider has.</p>
-        </article>
-        <article class="flow-card">
-          <span class="num">2</span>
-          <h3>Set the conditions</h3>
-          <p>Choose the weather, traffic level, time of day, and vehicle. These change how long the same distance takes on the road.</p>
-        </article>
-        <article class="flow-card">
-          <span class="num">3</span>
-          <h3>Get the arrival time</h3>
-          <p>Predict Delivery Time sends your details to the trained model. The result shows up as an estimated arrival in minutes.</p>
-        </article>
-      </div>
-    </section>
 
-    <section class="page-view" data-page="faqs" hidden>
-      <p class="eyebrow">QUESTIONS</p>
-      <h1>FAQs</h1>
-      <p class="lede">Answers about the estimate, the inputs, and how close the prediction usually is.</p>
-      <div class="faq-list">
-        <article class="faq-item">
-          <h3>What does the estimate include?</h3>
-          <p>Preparation plus the ride, adjusted for distance, traffic, weather, time of day, vehicle, and rider experience.</p>
-        </article>
-        <article class="faq-item">
-          <h3>Which values can I choose?</h3>
-          <p>Weather is Clear, Rainy, Snowy, Foggy, or Windy. Traffic is Low, Medium, or High. Time of day is Morning, Afternoon, Evening, or Night. Vehicles are Bike, Scooter, or Car.</p>
-        </article>
-        <article class="faq-item">
-          <h3>Why do distance and preparation time matter most?</h3>
-          <p>A longer trip and a longer kitchen wait both add minutes before the order can reach you. The model uses both directly.</p>
-        </article>
-        <article class="faq-item">
-          <h3>How do traffic and weather change the time?</h3>
-          <p>Heavy traffic slows the rider. Rain, snow, fog, and wind can also add time compared with a clear evening on a quiet road.</p>
-        </article>
-        <article class="faq-item">
-          <h3>How close is the prediction?</h3>
-          <p>The production model is a linear regression with about 5.9 minutes of average error on held-out orders.</p>
-        </article>
+    <div class="how-grid">
+
+      <div class="how-card">
+
+        <div class="how-number">01</div>
+
+        <div class="how-icon">📍</div>
+
+        <h3>Tell us the distance</h3>
+
+        <p>
+          Enter how far the restaurant is from your location.
+        </p>
+
       </div>
-    </section>
-  </div>
+
+
+      <div class="how-card">
+
+        <div class="how-number">02</div>
+
+        <div class="how-icon">👨‍🍳</div>
+
+        <h3>Share preparation time</h3>
+
+        <p>
+          Tell us approximately how long the restaurant takes
+          to prepare your order.
+        </p>
+
+      </div>
+
+
+      <div class="how-card">
+
+        <div class="how-number">03</div>
+
+        <div class="how-icon">🛵</div>
+
+        <h3>Add delivery conditions</h3>
+
+        <p>
+          Weather, traffic, time of day and vehicle type
+          help us understand the delivery journey.
+        </p>
+
+      </div>
+
+
+      <div class="how-card">
+
+        <div class="how-number">04</div>
+
+        <div class="how-icon">⏱️</div>
+
+        <h3>Get your ETA</h3>
+
+        <p>
+          Our prediction system combines these factors and
+          gives you an estimated delivery time.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="how-bottom">
+
+      <div>
+        <span>🍽️</span>
+        <strong>Better planning</strong>
+      </div>
+
+      <div>
+        <span>⏱️</span>
+        <strong>Clear expectations</strong>
+      </div>
+
+      <div>
+        <span>😊</span>
+        <strong>Better experience</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================================= -->
+  <!-- FAQ -->
+  <!-- ================================================= -->
+
+  <section
+    data-page="faqs"
+    class="inner-page faq-page"
+    hidden
+  >
+
+    <div class="inner-page-header">
+
+      <div class="eyebrow">
+        GOT QUESTIONS?
+      </div>
+
+      <h1>
+        Frequently Asked <span>Questions</span>
+      </h1>
+
+      <p>
+        Everything you need to know about your delivery estimate.
+      </p>
+
+    </div>
+
+
+    <div class="faq-list">
+
+      <details open>
+
+        <summary>
+          How is the delivery time estimated?
+          <span>+</span>
+        </summary>
+
+        <p>
+          The estimate considers factors such as restaurant
+          preparation time, distance, traffic, weather,
+          time of day and delivery partner experience.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          Is the predicted time exact?
+          <span>+</span>
+        </summary>
+
+        <p>
+          No. The result is an estimated delivery time.
+          Actual delivery can vary because real-world conditions
+          can change during the journey.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          Why does traffic affect delivery time?
+          <span>+</span>
+        </summary>
+
+        <p>
+          Higher traffic can increase the amount of time required
+          to travel from the restaurant to the destination.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          Does weather affect the estimate?
+          <span>+</span>
+        </summary>
+
+        <p>
+          Yes. Weather conditions such as rain, fog or other
+          difficult conditions can affect delivery time.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          What information do I need to provide?
+          <span>+</span>
+        </summary>
+
+        <p>
+          You only need to provide the order distance,
+          preparation time, delivery partner experience,
+          weather, traffic, time of day and vehicle type.
+        </p>
+
+      </details>
+
+
+      <details>
+
+        <summary>
+          Can the actual delivery time be different?
+          <span>+</span>
+        </summary>
+
+        <p>
+          Yes. The prediction provides an estimate and actual
+          delivery time may vary depending on changing conditions.
+        </p>
+
+      </details>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================================================= -->
+  <!-- FOOTER -->
+  <!-- ================================================= -->
+
+  <footer class="footer">
+
+    <div>
+      🍴 FoodDelivery ETA Predictor
+    </div>
+
+    <span>•</span>
+
+    <div>
+      Get your estimated delivery time
+    </div>
+
+    <span>•</span>
+
+    <div>
+      Plan better, enjoy sooner!
+    </div>
+
+    <div class="footer-right">
+      ❤️ Good food brings good mood!
+    </div>
+
+  </footer>
+
+
   <script src="app.js"></script>
+
 </body>
 </html>

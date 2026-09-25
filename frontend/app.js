@@ -47,7 +47,7 @@ function showView(name) {
   window.scrollTo(0, 0);
 }
 
-document.querySelector(".nav").addEventListener("click", (event) => {
+document.addEventListener("click", (event) => {
   const link = event.target.closest("a[data-view]");
   if (!link) return;
   event.preventDefault();

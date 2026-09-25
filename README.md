@@ -35,23 +35,15 @@ docker compose down
 
 For local development without Docker:
 
-1. **Install dependencies:**
+1. **Start the backend:**
 
 ```bash
-# Backend
 cd api
 pip install -r requirements.txt
-
-```
-
-2. **Start the backend:**
-
-```bash
-cd api
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-3. **Start the frontend:**
+2. **Start the frontend:**
 
 ```bash
 cd frontend
@@ -73,7 +65,7 @@ MLflow Production Model
 ### Services
 
 - **api:** FastAPI backend service that loads the MLflow-registered production model
-- **frontend:** Web UI that calls the prediction API from the browser
+- **frontend:** Custom HTML/CSS/JS web UI that calls the prediction API from the browser
 
 ### MLflow Model Access
 
@@ -118,8 +110,10 @@ Food_Delivery_Times/
 ├── data/                 # Raw data
 ├── mlflow.db            # MLflow tracking database
 ├── mlruns/              # MLflow experiment artifacts
-├── frontend/            # Delivery ETA web UI
-├── app.py               # Previous Streamlit form
+├── frontend/            # Custom web UI (HTML/CSS/JS)
+│   ├── index.html       # Main UI page
+│   ├── styles.css       # Custom styling
+│   └── app.js           # Frontend logic
 ├── Dockerfile.api        # FastAPI container definition
 ├── Dockerfile.frontend  # Frontend container definition
 ├── docker-compose.yml   # Docker Compose configuration
@@ -136,8 +130,9 @@ Food_Delivery_Times/
 - 11 engineered features for prediction
 - MLflow experiment tracking
 - Model versioning with production alias
-- Real-time prediction via web interface
+- Real-time prediction via custom web interface
 - Containerized deployment with Docker Compose
+- Modern responsive UI with HTML/CSS/JavaScript
 
 ## Testing
 

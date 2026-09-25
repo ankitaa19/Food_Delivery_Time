@@ -3,8 +3,7 @@ const TRAFFIC = { Low: 1, Medium: 2, High: 3 };
 function apiBase() {
   const params = new URLSearchParams(window.location.search);
   if (params.get("api")) return params.get("api").replace(/\/$/, "");
-  const host = window.location.hostname || "127.0.0.1";
-  return `http://${host}:8000`;
+  return "http://localhost:8000";
 }
 
 function payloadFromForm(form) {
